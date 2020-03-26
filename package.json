@@ -1,6 +1,6 @@
 {
   "name": "requisition",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Requests front-end for Sonarr and/or Radarr.",
   "author": "Brian Ramsey",
   "private": true,
