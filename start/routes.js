@@ -15,4 +15,16 @@
 
 const Route = use('Route')
 
+// API endpoints
+Route.group(() => {
+  Route.get("hello", () => {
+    return { greeting: "Hello from the backend" };
+  })
+  Route.post("post-example", () => {
+    return { greeting: "Nice post!" };
+  })
+  Route.any('*', 'NuxtController.render')
+}).prefix('api')
+
+// Vue routing from here on out...
 Route.any('*', 'NuxtController.render')
