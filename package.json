@@ -22,6 +22,7 @@
     "@adonisjs/lucid": "^4.0.22",
     "@adonisjs/session": "^1.0.19",
     "@adonisjs/shield": "^1.0.4",
+    "@adonisjs/validator": "^5.0.6",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
@@ -38,6 +39,7 @@
     "babel-jest": "^24.1.0",
     "jest": "^24.1.0",
     "vue-jest": "^4.0.0-0",
-    "ts-jest": "^25.0.0"
+    "ts-jest": "^25.0.0",
+    "standard": "^14.3.3"
   }
 }
