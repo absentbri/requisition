@@ -12,3 +12,9 @@
     </v-flex>
   </v-layout>
 </template>
+
+<script>
+  export default {
+    layout: 'private'
+  }
+</script>

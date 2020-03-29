@@ -23,6 +23,7 @@
     "@adonisjs/session": "^1.0.19",
     "@adonisjs/shield": "^1.0.4",
     "@adonisjs/validator": "^5.0.6",
+    "@nuxtjs/auth": "^4.9.0",
     "@nuxtjs/axios": "^5.9.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",

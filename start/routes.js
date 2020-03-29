@@ -17,16 +17,29 @@ const Route = use('Route')
 
 // API endpoints
 Route.group(() => {
+
   Route.get("hello", () => {
     return { greeting: "Hello from the backend" }
   })
-  Route.post("post-example", () => {
-    return { greeting: "Nice post!" }
-  })
-  Route.any('*', () => {
-    return { error: "Route not found!" }
-  })
-}).prefix('api')
 
-// Vue routing from here on out...
+  Route.get('session', 'UserSession.index')
+  Route.post('session', 'UserSession.create')
+  Route.delete('session', 'UserSession.destroy')
+
+}).prefix('auth')
+  .formats(['json'])
+
+Route.group(() => {
+
+  Route.get("hello", () => {
+    return { greeting: "Hello from the backend" }
+  })
+
+  Route.any('*', () => { return { error: "Route not found!" } })
+
+})
+  .prefix('api')
+  .formats(['json'])
+
+// VUE endpoints
 Route.any('*', 'NuxtController.render')

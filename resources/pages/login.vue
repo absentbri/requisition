@@ -9,38 +9,38 @@
         sm="8"
         md="4"
       >
-        <v-card class="elevation-12">
-          <v-toolbar
-            color="primary"
-            flat
-          >
-            <v-toolbar-title>Login form</v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <v-form @keyup.native.enter="login">
-              <v-text-field
-                label="Login"
-                name="login"
-                type="text"
-                prepend-icon="mdi-account"
-                v-model="username"
-              />
+        <v-form @submit.prevent="userLogin">
+          <v-card class="elevation-12">
+            <v-toolbar
+              color="primary"
+              flat
+            >
+              <v-toolbar-title>Login form</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>
+                <v-text-field
+                  label="Username"
+                  name="login"
+                  type="text"
+                  prepend-icon="mdi-account"
+                  v-model="login.username"
+                />
 
-              <v-text-field
-                id="password"
-                label="Password"
-                name="password"
-                type="password"
-                prepend-icon="mdi-lock"
-                v-model="password"
-              />
-            </v-form>
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn color="primary" @click="login">Login</v-btn>
-          </v-card-actions>
-        </v-card>
+                <v-text-field
+                  id="password"
+                  label="Password"
+                  name="password"
+                  type="password"
+                  prepend-icon="mdi-lock"
+                  v-model="login.password"
+                />
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer />
+              <v-btn color="primary" type="submit">Login</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-form>
       </v-col>
     </v-row>
   </v-container>
@@ -48,21 +48,22 @@
 
 <script>
   export default {
-    layout: 'login',
+    layout: 'pretty',
+    auth: 'guest',
     data() {
       return {
-        username: "",
-        password: ""
+        login: {
+          username: "",
+          password: ""
+        }
       }
     },
     methods: {
-      async login() {
-        const { username, password } = this;
-        if(this.username.length && this.password.length) {
-          const authMe = await this.$axios.post("/api/auth/basic", {
-            username,
-            password
-          });
+      async userLogin() {
+        try {
+          let response = await this.$auth.loginWith('local', { data: this.login })
+        } catch (err) {
+          console.log(err)
         }
       }
     }

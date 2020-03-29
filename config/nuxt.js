@@ -50,6 +50,7 @@ module.exports = {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    '@nuxtjs/auth'
   ],
   /*
   ** Axios module configuration
@@ -87,5 +88,35 @@ module.exports = {
     */
     extend (config, ctx) {
     }
+  },
+  /*
+  ** Auth configuration
+  */
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/session', method: 'post', propertyName: false, autoFetchUser: false },
+          logout: { url: '/auth/session', method: 'delete' },
+          user: { url: '/auth/session', method: 'get', propertyName: false }
+        },
+        tokenRequired: true,
+        tokenType: false,
+        cookie: true,
+      }
+    },
+    // these don't work right in V4, this is "close enough"...
+    redirect: {
+      login: '/login/',
+      logout: '/login/'
+    },
+    localStorage: false
+  },
+  /*
+  ** Router configuration
+  */
+  router: {
+    middleware: ['auth']
   }
+
 }

@@ -14,9 +14,7 @@
 </template>
 
 <script>
-
 export default {
-  components: {
-  }
+  layout: 'private'
 }
 </script>

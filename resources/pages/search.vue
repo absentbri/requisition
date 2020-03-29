@@ -15,10 +15,6 @@
 
 <script>
 	export default {
-		name: "search"
+    layout: 'private'
 	}
 </script>
-
-<style scoped>
-
-</style>
