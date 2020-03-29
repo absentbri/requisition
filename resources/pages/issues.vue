@@ -3,20 +3,12 @@
     <v-flex>
       <v-card>
         <v-card-title class="headline">
-          Welcome to Requisition
+          Issues
         </v-card-title>
         <v-card-text>
-          <p>Some kind of dashboard here?</p>
+          <p>Shit broke, eh?</p>
         </v-card-text>
       </v-card>
     </v-flex>
   </v-layout>
 </template>
-
-<script>
-
-export default {
-  components: {
-  }
-}
-</script>
