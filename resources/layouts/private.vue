@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
 
     <v-app-bar
       :clipped-left="true"
@@ -101,6 +101,10 @@ export default {
 </script>
 
 <style lang="scss">
+  body {
+    // feel this should come from the dark theme??
+    background: black;
+  }
   .container {
     max-width: 1200px;
   }

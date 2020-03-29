@@ -15,7 +15,7 @@
 
 const Route = use('Route')
 
-// API endpoints
+// AUTH endpoints
 Route.group(() => {
 
   Route.get("hello", () => {
@@ -29,6 +29,7 @@ Route.group(() => {
 }).prefix('auth')
   .formats(['json'])
 
+// API endpoints
 Route.group(() => {
 
   Route.get("hello", () => {
@@ -39,6 +40,7 @@ Route.group(() => {
 
 })
   .prefix('api')
+  .middleware(['auth'])
   .formats(['json'])
 
 // VUE endpoints
