@@ -23,6 +23,7 @@
     <v-navigation-drawer
       :mini-variant="true"
       :clipped="true"
+      :permanent="true"
       fixed
       app
     >
