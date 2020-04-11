@@ -22,7 +22,7 @@ const providers = [
   '@adonisjs/session/providers/SessionProvider',
   '@adonisjs/auth/providers/AuthProvider',
   path.join(__dirname, '..', 'providers', 'Nuxt/Provider'),
-  path.join(__dirname, '..', 'providers', 'Sonarr/Provider')
+  path.join(__dirname, '..', 'providers', 'Sonarr/Provider') // this causes migration problems?
 ]
 
 /*
