@@ -32,5 +32,5 @@ module.exports = {
       filename: Helpers.databasePath('development.sqlite')
     },
     useNullAsDefault: true
-  },
+  }
 }
