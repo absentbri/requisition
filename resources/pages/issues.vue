@@ -15,6 +15,7 @@
 
 <script>
   export default {
+    name: 'issues',
     layout: 'private'
   }
 </script>

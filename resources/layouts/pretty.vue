@@ -6,7 +6,9 @@
         fill-height
         fluid
       >
-        <nuxt />
+        <v-responsive min-width="350">
+          <nuxt />
+        </v-responsive>
       </v-container>
     </v-content>
   </v-app>

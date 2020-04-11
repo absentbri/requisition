@@ -1,14 +1,29 @@
 <template>
   <v-app>
-
     <v-app-bar
-      :clipped-left="true"
       fixed
       app
     >
+      <v-btn
+        icon
+        title="Home"
+        nuxt
+        to="/"
+      >
+        <v-icon>mdi-home</v-icon>
+      </v-btn>
       <v-toolbar-title v-text="title" />
 
       <v-spacer />
+
+      <v-btn
+        icon
+        title="Settings"
+        to="/settings"
+        nuxt
+      >
+        <v-icon>mdi-cog</v-icon>
+      </v-btn>
 
       <v-btn
         icon
@@ -17,50 +32,32 @@
       >
         <v-icon>mdi-logout</v-icon>
       </v-btn>
-
     </v-app-bar>
-
-    <v-navigation-drawer
-      :mini-variant="true"
-      :clipped="true"
-      :permanent="true"
-      fixed
-      app
-    >
-
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          :title="item.title"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <!-- retained due to https://github.com/vuetifyjs/vuetify/issues/2830 -->
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-    </v-navigation-drawer>
 
     <v-content>
       <v-container>
-        <nuxt />
+        <v-responsive min-width="350">
+          <nuxt />
+        </v-responsive>
       </v-container>
     </v-content>
 
-    <v-footer app>
-      <v-spacer />
-      <span>Requisition Version 0.0.1</span>
-      <v-spacer />
-    </v-footer>
-
+    <v-bottom-navigation
+      app
+      fixed
+      grow
+    >
+      <v-btn
+        v-for="(item, i) in items"
+        :key="i"
+        :to="item.to"
+        :title="item.title"
+        nuxt
+      >
+        <span>{{ item.title }}</span>
+        <v-icon>{{ item.icon }}</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </v-app>
 </template>
 
@@ -94,8 +91,8 @@ export default {
     }
   },
   methods: {
-    async logout() {
-      await this.$auth.logout();
+    async logout () {
+      await this.$auth.logout()
     }
   }
 }
@@ -103,10 +100,14 @@ export default {
 
 <style lang="scss">
   body {
-    // feel this should come from the dark theme??
+    /* feel this should come from the dark theme?? */
     background: black;
   }
   .container {
     max-width: 1200px;
+  }
+  /* remove the active background from home button*/
+  .v-btn:not(.v-btn--text):not(.v-btn--outlined).v-btn--active:before {
+    opacity: 0;
   }
 </style>

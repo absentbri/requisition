@@ -15,6 +15,7 @@
 
 <script>
   export default {
+    name: 'requests',
     layout: 'private'
   }
 </script>

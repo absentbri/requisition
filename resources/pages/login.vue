@@ -48,6 +48,7 @@
 
 <script>
   export default {
+    name: 'login',
     layout: 'pretty',
     auth: 'guest',
     data() {
@@ -61,7 +62,7 @@
     methods: {
       async userLogin() {
         try {
-          let response = await this.$auth.loginWith('local', { data: this.login })
+          await this.$auth.loginWith('local', { data: this.login })
         } catch (err) {
           console.log(err)
         }
