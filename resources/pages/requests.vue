@@ -3,10 +3,10 @@
     <v-flex>
       <v-card>
         <v-card-title class="headline">
-          Welcome to Requisition
+          Requests
         </v-card-title>
         <v-card-text>
-          <p>Some kind of dashboard here?</p>
+          <p>See your demands</p>
         </v-card-text>
       </v-card>
     </v-flex>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-export default {
-  layout: 'private'
-}
+  export default {
+    layout: 'private'
+  }
 </script>

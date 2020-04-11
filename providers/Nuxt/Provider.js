@@ -1,7 +1,7 @@
 const { ServiceProvider } = require('@adonisjs/fold')
 const { Nuxt, Builder } = require('nuxt')
 
-class NuxtProvider extends ServiceProvider {
+class Provider extends ServiceProvider {
   register () {
     this.app.singleton('Service/Nuxt', () => {
       const config = this.app.use('Config').get('nuxt')
@@ -21,4 +21,4 @@ class NuxtProvider extends ServiceProvider {
   }
 }
 
-module.exports = NuxtProvider
+module.exports = Provider
