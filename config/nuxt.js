@@ -96,13 +96,12 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/auth/session', method: 'post', propertyName: false, autoFetchUser: false },
+          login: { url: '/auth/session', method: 'post', propertyName: 'user', autoFetchUser: false },
           logout: { url: '/auth/session', method: 'delete' },
-          user: { url: '/auth/session', method: 'get', propertyName: false }
+          user: { url: '/auth/session', method: 'get', propertyName: 'user' }
         },
-        tokenRequired: true,
         tokenType: false,
-        cookie: true,
+        tokenRequired: false
       }
     },
     // these don't work right in V4, this is "close enough"...

@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "serve:dev": "npm run dev",
-    "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node server.js",
+    "dev": "nodemon --watch app --watch start --watch bootstrap --watch config --watch .env -x node server.js",
     "build": "cross-env NODE_ENV=production node ./ace nuxtbuild",
     "start": "cross-env NODE_ENV=production node server.js",
     "test": "jest"
@@ -23,12 +23,15 @@
     "@adonisjs/session": "^1.0.19",
     "@adonisjs/shield": "^1.0.4",
     "@adonisjs/validator": "^5.0.6",
+    "@nativecode/radarr": "^4.2.0",
+    "@nativecode/sonarr": "^5.2.0",
     "@nuxtjs/auth": "^4.9.0",
     "@nuxtjs/axios": "^5.9.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "cross-env": "^7.0.2",
     "husky": "^4.2.3",
+    "lodash": "^4.17.15",
     "nuxt": "^2.0.0",
     "sqlite3": "^4.1.1"
   },
@@ -36,11 +39,40 @@
     "@nuxt/typescript-build": "^0.6.1",
     "@nuxtjs/vuetify": "^1.11.0",
     "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-eslint": "^10.1.0",
     "babel-jest": "^25.2.3",
+    "eslint-plugin-vue": "^6.2.2",
     "jest": "^25.2.3",
     "nodemon": "^2.0.2",
-    "standard": "^14.3.3",
+    "standardx": "^5.0.0",
     "ts-jest": "^25.0.0",
     "vue-jest": "^3.0.5"
-  }
+  },
+  "standardx": {
+    "globals": [
+      "use"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:vue/recommended"
+    ],
+    "rules": {
+      "curly": [
+        "error",
+        "all"
+      ]
+    },
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+      "parser": "babel-eslint",
+      "ecmaVersion": 2015,
+      "sourceType": "module"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "ie >= 11"
+  ]
 }

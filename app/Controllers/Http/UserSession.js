@@ -6,7 +6,7 @@ class UserSession {
       const { username, password } = request.all()
       try {
         const {id, username:user, email} = await auth.attempt(username, password)
-        return {id, username: user, email}
+        return { user: {id, username: user, email} }
       } catch (e) {
         // console.log(e)
       }
@@ -15,7 +15,7 @@ class UserSession {
     async index ({ auth }) {
       try {
         const {id, username, email} = await auth.getUser();
-        return {id, username, email}
+        return { user: {id, username, email} }
       } catch (e) {
         // console.log(e)
         return {}
