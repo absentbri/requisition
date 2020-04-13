@@ -22,7 +22,11 @@ class Sonarr {
       })
     }
 
-    return this.Client[endpoint]
+    if (this.Client) {
+      return this.Client[endpoint]
+    } else {
+      return this.Client
+    }
   }
 
   update (config) {

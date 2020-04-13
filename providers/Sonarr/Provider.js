@@ -9,8 +9,14 @@ class SonarrProvider extends ServiceProvider {
 
   async boot() {
     // grabs initial config from the database to pass into the provider
-    const Setting = this.app.use('App/Models/Setting')
-    this.Config = await Setting.find("sonarr")
+    try {
+      // initial migration fails as no table for this to call...
+      const Setting = this.app.use('App/Models/Setting')
+      this.Config = await Setting.find("sonarr")
+    } catch (e){
+      // Put into a log somewhere...
+    }
+
   }
 }
 

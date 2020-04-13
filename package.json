@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "serve:dev": "npm run dev",
-    "dev": "nodemon --watch app --watch start --watch bootstrap --watch config --watch .env -x node server.js",
+    "dev": "nodemon --watch app --watch start --watch providers --watch bootstrap --watch config --watch .env -x node server.js",
     "build": "cross-env NODE_ENV=production node ./ace nuxtbuild",
     "start": "cross-env NODE_ENV=production node server.js",
     "test": "jest"
