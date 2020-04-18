@@ -36,6 +36,7 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/eventbus'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -53,7 +54,8 @@ module.exports = {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    '@nuxtjs/toast'
   ],
   /*
   ** Axios module configuration
@@ -119,6 +121,20 @@ module.exports = {
   */
   router: {
     middleware: ['auth']
+  },
+  /**
+   * Toast Configuration
+  */
+  toast: {
+    position: 'top-center',
+    register: [ 
+      {
+        name: 'error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
   }
-
 }

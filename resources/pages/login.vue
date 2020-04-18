@@ -9,6 +9,12 @@
         sm="8"
         md="4"
       >
+        <v-alert
+          v-model="alert.show"
+          :type="alert.type"
+          v-text="alert.text"
+          dismissible
+        />
         <v-form @submit.prevent="userLogin">
           <v-card class="elevation-12">
             <v-toolbar
@@ -56,15 +62,24 @@
         login: {
           username: "",
           password: ""
+        },
+        alert: {
+          show: false,
+          type: 'error',
+          text: ''
         }
       }
     },
     methods: {
       async userLogin() {
+        if(!this.login.username.length && !this.login.password.length) return false
+        let outcome = true;
         try {
-          await this.$auth.loginWith('local', { data: this.login })
-        } catch (err) {
-          console.log(err)
+          const req = await this.$auth.loginWith('local', { data: this.login })
+          outcome = req.data.success
+        } catch (err) { }
+        if(!outcome) {
+          this.$toast.error('Username or password invalid.')
         }
       }
     }

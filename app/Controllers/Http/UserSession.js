@@ -8,7 +8,7 @@ class UserSession {
         const {id, username:user, email} = await auth.attempt(username, password)
         return { user: {id, username: user, email} }
       } catch (e) {
-        // console.log(e)
+        return { success: false }
       }
     }
 
