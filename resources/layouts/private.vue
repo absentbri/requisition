@@ -16,14 +16,14 @@
 
       <v-spacer />
 
-      <v-btn
+      <!--<v-btn
         icon
         title="Settings"
         to="/settings"
         nuxt
       >
         <v-icon>mdi-cog</v-icon>
-      </v-btn>
+      </v-btn>-->
 
       <v-btn
         icon
@@ -83,10 +83,15 @@ export default {
           to: '/requests'
         },
         {
+          icon: 'mdi-cog',
+          title: 'Settings',
+          to: '/settings'
+        },
+        /*{
           icon: 'mdi-alert-circle-outline',
           title: 'Issues',
           to: '/issues'
-        }
+        }*/
       ]
     }
   },
