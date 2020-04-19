@@ -185,7 +185,7 @@ module.exports = {
     */
     console: {
       driver: 'console',
-      name: 'adonis-app',
+      name: 'requisition',
       level: 'info'
     },
 
@@ -202,8 +202,8 @@ module.exports = {
     */
     file: {
       driver: 'file',
-      name: 'adonis-app',
-      filename: 'adonis.log',
+      name: 'requisition',
+      filename: 'requisition.log',
       level: 'info'
     }
   }
