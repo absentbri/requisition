@@ -127,12 +127,16 @@ module.exports = {
   */
   toast: {
     position: 'top-center',
-    register: [ 
+    iconPack: 'mdi',
+    keepOnHover: true,
+    theme: 'bubble',
+    register: [
       {
         name: 'error',
         message: 'Oops...Something went wrong',
         options: {
-          type: 'error'
+          type: 'error',
+          duration: 5000
         }
       }
     ]

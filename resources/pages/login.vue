@@ -73,13 +73,14 @@
     methods: {
       async userLogin() {
         if(!this.login.username.length && !this.login.password.length) return false
+        this.$toast.clear()
         let outcome = true;
         try {
           const req = await this.$auth.loginWith('local', { data: this.login })
           outcome = req.data.success
         } catch (err) { }
         if(!outcome) {
-          this.$toast.error('Username or password invalid.')
+          this.$toast.error('Username or password invalid.', { singleton: true })
         }
       }
     }
