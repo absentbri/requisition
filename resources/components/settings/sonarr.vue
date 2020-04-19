@@ -4,15 +4,6 @@
     v-model="state.valid"
   >
     <v-card flat>
-      <v-alert
-        v-model="alert.show"
-        dense
-        text
-        :type="alert.type"
-        dismissible
-      >
-        {{ alert.text }}
-      </v-alert>
 
       <v-row>
         <v-col
@@ -144,11 +135,6 @@ export default {
         valid: false,
         saving: false
       },
-      alert: {
-        show: false,
-        type: 'success',
-        text: ''
-      },
       form: {
         hostname: '',
         port: '',
@@ -168,22 +154,17 @@ export default {
   },
   mounted () {
     this.getSettings()
-    this.refresh()
   },
   methods: {
     connectivityTest () {
       this.$axios.post('/api/settings/sonarr/test', this.form).then((response) => {
         if (response.data) {
-          this.alert.text = 'Connection successful'
-          this.alert.type = 'success'
-          this.alert.show = true
+          this.$toast.success('Username or password invalid.')
         } else {
           throw new Error('connection failed')
         }
       }).catch((error) => {
-        this.alert.text = `Connection unsuccessful (${error.message})`
-        this.alert.type = 'error'
-        this.alert.show = true
+        this.$toast.error(`Connection unsuccessful (${error.message})`, { icon: 'alert', duration: 5000 })
       })
     },
     doSave () {
@@ -196,13 +177,11 @@ export default {
       const req = await this.$axios.get(`/api/settings/sonarr`)
       if(req.data) {
         this.form = Object.assign({}, this.form, req.data)
+        await this.refresh()
       }
       this.$nuxt.$loading.finish()
     },
-    async refresh (type) {
-      if (!type) {
-        type = 'all'
-      }
+    async refresh (type = 'all') {
       const req = await this.$axios.get(`/api/settings/sonarr/options/${type}`)
       if (type === 'all') {
         this.options = Object.assign({}, this.options, req.data)
