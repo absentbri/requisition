@@ -82,10 +82,11 @@ class SonarrController {
   async _folders () {
     /* TODO - Add PRs for:
     * - baseUrl
-    * - http_post for `series`
+    * - http_post for `Series`
+    * - http_get for `Series-Lookup`
     * */
 
-    // hard coding until API can return this, PR added ( https://github.com/nativecode-dev/media-clients/pull/2
+    // hard coding until API can return this, PR added https://github.com/nativecode-dev/media-clients/pull/2
     return [
       { text: "/tv/TV Shows/", value: 1 }
     ]

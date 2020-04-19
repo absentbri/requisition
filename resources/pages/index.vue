@@ -29,12 +29,13 @@
 </template>
 
 <script>
-import slate from '@/components/slate.vue'
+import Slate from '@/components/slate.vue'
+
 export default {
   name: 'index',
   layout: 'private',
   components: {
-    slate
+    Slate
   },
   data () {
     return {
