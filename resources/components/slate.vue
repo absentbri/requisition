@@ -27,8 +27,9 @@
             :color="available ? 'green' : 'red'"
             pill
             small
-            v-text="available ? 'Available' : 'Missing'"
-          />
+          >
+            {{ available ? 'Available' : 'Missing' }}
+          </v-chip>
         </div>
 
         <v-card-text v-text="overview" />
@@ -60,7 +61,7 @@
             </v-icon> Available
           </v-btn>
 
-          <v-btn
+          <!--<v-btn
             v-if="available"
             class="mb-2"
             color="warning"
@@ -71,7 +72,7 @@
               mdi-alert-circle-outline
             </v-icon>
             Issue
-          </v-btn>
+          </v-btn>-->
 
           <v-btn
             class="mb-2"
