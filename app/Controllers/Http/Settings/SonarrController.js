@@ -4,10 +4,9 @@ const Setting = use('App/Models/Setting')
 const SonarrClient = use('Service/Sonarr')
 
 class SonarrController {
-
   /* CRUD */
   async index () {
-    return await Setting.find('sonarr')
+    return Setting.find('sonarr')
   }
 
   async store ({ request }) {
@@ -44,22 +43,25 @@ class SonarrController {
     }
   }
 
-  async options({ params }) {
-    switch(params.type) {
+  async options ({ params }) {
+    let obj = {}
+    switch (params.type) {
       case 'profiles':
-        return await this._profiles()
+        obj.profiles = await this._profiles()
+        break
       case 'folders':
-        return await this._folders()
+        obj.folders = await this._folders()
+        break
       default:
-        const obj = {}
-        obj['profiles'] = await this._profiles()
-        obj['folders'] = await this._folders()
-        return obj
+        obj.profiles = await this._profiles()
+        obj.folders = await this._folders()
+        break
     }
+    return obj
   }
 
   /* DEBUG */
-  async scratch() {
+  async scratch () {
     return {
       profiles: await this._profiles(),
       folders: this._folders()
@@ -67,20 +69,29 @@ class SonarrController {
   }
 
   /* PRIVATES */
-  async _profiles() {
+  async _profiles () {
     const response = await SonarrClient
       .get('profile')
       .list()
 
     return response.map(el => {
       return { text: el.name, value: el.id }
-    });
+    })
   }
-  async _folders() {
-    return []
-    return await SonarrClient
+
+  async _folders () {
+    /* TODO - Add PRs for:
+    * - baseUrl
+    * - http_post for `series`
+    * */
+
+    // hard coding until API can return this, PR added ( https://github.com/nativecode-dev/media-clients/pull/2
+    return [
+      { text: "/tv/TV Shows/", value: 1 }
+    ]
+    /* await SonarrClient
       .get('rootfolder')
-      .list()
+      .list() */
   }
 }
 

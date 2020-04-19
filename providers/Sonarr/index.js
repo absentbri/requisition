@@ -9,11 +9,7 @@ class Sonarr {
   }
 
   get (endpoint = 'system') {
-    if (this.Client) {
-      return this.Client[endpoint]
-    }
-
-    if (this.Config) {
+    if (!this.Client && this.Config) {
       this.Client = new SonarrClient({
         apikey: this.Config.api_key,
         host: this.Config.hostname,
@@ -36,11 +32,12 @@ class Sonarr {
 
   async test (config) {
     // isolated call to client to test if credentials work
+    const { apiKey: apikey, hostname: host, port, ssl: secure } = config
     const conn = new SonarrClient({
-      apikey: config.apiKey,
-      host: config.hostname,
-      port: config.port,
-      secure: config.ssl
+      apikey,
+      host,
+      port,
+      secure,
     })
 
     try {

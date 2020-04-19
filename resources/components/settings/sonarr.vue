@@ -4,7 +4,6 @@
     v-model="state.valid"
   >
     <v-card flat>
-
       <v-row>
         <v-col
           cols="12"
@@ -73,7 +72,10 @@
                 v-model="form.profile"
                 class="my-4"
                 :items="options.profiles"
+                :rules="[v => !!v || 'Profile is required']"
                 label="Default Quality Profile"
+                no-data-text="No profiles available"
+                clearable
               />
             </v-col>
             <v-col
@@ -93,7 +95,10 @@
                 v-model="form.folder"
                 class="my-4"
                 :items="options.folders"
+                :rules="[v => !!v || 'Folder is required']"
                 label="Default Root Folder"
+                no-data-text="No folders available"
+                clearable
               />
             </v-col>
             <v-col
@@ -146,9 +151,7 @@ export default {
       },
       options: {
         profiles: [],
-        folders: [
-          { text: '/tv', value: 1 }
-        ]
+        folders: []
       }
     }
   },
@@ -156,26 +159,33 @@ export default {
     this.getSettings()
   },
   methods: {
-    connectivityTest () {
-      this.$axios.post('/api/settings/sonarr/test', this.form).then((response) => {
+    async connectivityTest () {
+      try {
+        this.$toast.clear()
+        const response = await this.$axios.post('/api/settings/sonarr/test', this.form)
         if (response.data) {
-          this.$toast.success('Username or password invalid.')
+          await this.refresh()
+          this.$toast.success('Connection Successful.')
         } else {
           throw new Error('connection failed')
         }
-      }).catch((error) => {
-        this.$toast.error(`Connection unsuccessful (${error.message})`, { icon: 'alert', duration: 5000 })
-      })
-    },
-    doSave () {
-      if (this.state.valid) {
-        this.$axios.post('/api/settings/sonarr', this.form)
+      } catch (e) {
+        this.$toast.error(`Connection unsuccessful (${e.message})`, { icon: 'alert', duration: 5000 })
       }
     },
-    async getSettings() {
+    async doSave () {
+      this.$toast.clear()
+      if (!this.state.valid) { return this.$toast.error('Unable to save, please check fields...') }
+      try {
+        await this.$axios.post('/api/settings/sonarr', this.form)
+      } catch (e) {
+        this.$toast.error('An error occurred...')
+      }
+    },
+    async getSettings () {
       this.$nuxt.$loading.start()
-      const req = await this.$axios.get(`/api/settings/sonarr`)
-      if(req.data) {
+      const req = await this.$axios.get('/api/settings/sonarr')
+      if (req.data) {
         this.form = Object.assign({}, this.form, req.data)
         await this.refresh()
       }
@@ -183,11 +193,7 @@ export default {
     },
     async refresh (type = 'all') {
       const req = await this.$axios.get(`/api/settings/sonarr/options/${type}`)
-      if (type === 'all') {
-        this.options = Object.assign({}, this.options, req.data)
-      } else {
-        this.options[type] = req.data
-      }
+      this.options = Object.assign({}, this.options, req.data)
     }
   }
 }
